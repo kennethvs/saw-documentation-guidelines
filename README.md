@@ -8,7 +8,7 @@ Standard frameworks, skills, and workflows for creating Secure at Work (SAW) Kno
 
 This repository contains:
 
-- **Skill files** — Structured templates for four document types (Policy Article, Overview, Known Gap, How-To)
+- **Skill files** — Structured templates for five document types (Policy Article, Overview, Known Gap, How-To, Description Field)
 - **Conversion workflows** — Integration with Claude app for automated markdown-to-HTML/DOCX conversion
 - **Standards and rules** — Content accuracy, portal terminology, and structural consistency
 
@@ -42,7 +42,7 @@ The Claude Project automatically fetches the latest skill file from this reposit
 
 **Structure:** Intro → Confidence → Properties → Purpose → Settings Overview → Security Impact → Known Impact → Summary → References
 
-**File:** `skills/SKILL-Policy-Article.md`
+**File:** `Skills/SKILL-Policy-Article.md`
 
 **Example use cases:**
 - W1x - CP - WDAC - Audit - v1.0
@@ -56,7 +56,7 @@ The Claude Project automatically fetches the latest skill file from this reposit
 
 **Structure:** Intro → Confidence → Properties → Purpose → Feature Explanation → How It Works → Security Impact → Known Impact → Related KB Articles → Summary → References
 
-**File:** `skills/SKILL-Overview.md`
+**File:** `Skills/SKILL-Overview.md`
 
 **Example use cases:**
 - Properties Catalog Overview (with links to platform-specific policies)
@@ -70,7 +70,7 @@ The Claude Project automatically fetches the latest skill file from this reposit
 
 **Structure:** Intro → Confidence → Properties → Purpose → Gap Description → Risk Assessment → Known Impact → Decision → Summary → References
 
-**File:** `skills/SKILL-Known-Gap.md`
+**File:** `Skills/SKILL-Known-Gap.md`
 
 **Example use cases:**
 - "Company Portal cannot rename Android Enterprise devices post-enrollment"
@@ -84,7 +84,7 @@ The Claude Project automatically fetches the latest skill file from this reposit
 
 **Structure:** Intro → Confidence → Properties → Purpose → Prerequisites → Steps → Verification → Troubleshooting → Summary → Related Articles
 
-**File:** `skills/SKILL-How-To.md`
+**File:** `Skills/SKILL-How-To.md`
 
 **Example use cases:**
 - "How to manually backup Intune device configuration"
@@ -93,15 +93,30 @@ The Claude Project automatically fetches the latest skill file from this reposit
 
 ---
 
+### 5. Description Field
+**Use for:** Generating high-quality description fields for metadata, skill frontmatter, KB summaries, and article snippets.
+
+**Structure:** Context Summary -> Constraints -> Candidate Descriptions -> Recommended Description -> Validation Checklist
+
+**File:** `Skills/SKILL-Description-Field.md`
+
+**Example use cases:**
+- Create frontmatter `description` text for new skill files
+- Generate concise KB summary text for article previews
+- Standardize description quality across SAW documentation artifacts
+
+---
+
 ## Repository Structure
 
 ```
 kennethvs/saw-documentation-guidelines/
-├── skills/
+├── Skills/
 │   ├── SKILL-Policy-Article.md
 │   ├── SKILL-Overview.md
 │   ├── SKILL-Known-Gap.md
-│   └── SKILL-How-To.md
+│   ├── SKILL-How-To.md
+│   └── SKILL-Description-Field.md
 ├── README.md (this file)
 ├── PROJECT-SYSTEM-PROMPT.md (Claude Project configuration)
 └── examples/ (optional: example articles in each category)
@@ -241,8 +256,8 @@ The Claude Project handles skill fetching and applies the appropriate structure 
 
 ### Create a New Article
 
-1. **Decide the document type** — Policy Article, Overview, Known Gap, or How-To
-2. **Review the corresponding skill file** in `/skills/` (e.g., `SKILL-Policy-Article.md`)
+1. **Decide the document type** — Policy Article, Overview, Known Gap, How-To, or Description Field
+2. **Review the corresponding skill file** in `/Skills/` (e.g., `SKILL-Policy-Article.md`)
 3. **Write your `.md` file** following the skill's section structure and content rules
 4. **Commit to your local documentation repository** (separate from this one)
 5. **When ready to finalize**, upload to the Claude Project and specify the type
@@ -253,7 +268,7 @@ The Claude Project handles skill fetching and applies the appropriate structure 
 If you discover a gap or improvement to a skill file:
 
 1. **Fork this repository** (if you don't have push access)
-2. **Edit the skill file** in `/skills/`
+2. **Edit the skill file** in `/Skills/`
 3. **Submit a pull request** with your changes
 4. **Kenneth and Joost review** and merge
 5. **The Claude Project automatically uses the updated skill** on the next conversion
