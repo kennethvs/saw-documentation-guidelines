@@ -88,10 +88,12 @@ For Description Field responses:
 - Do not include preface text, notes, thought process, diagnostics, confidence commentary, or "copy-paste line" labels
 - Do not include API/SHA retrieval commentary inside the generated field output
 - Use canonical base field order: `What does this do?`, `Why should you use this?`, `What is the end-user impact?`, `Learn more`; include `Category:` before these fields only when needed; include `Version <Major.Minor>` after these fields only when needed
-- Restrict labels to: `Category:`, `What does this do?`, `Why should you use this?`, `What is the end-user impact?`, `Learn more`, and `Version <Major.Minor>`
+- Restrict labels to exactly: `Category:`, `What does this do?`, `Why should you use this?`, `What is the end-user impact?`, `Learn more`, and `Version <Major.Minor>`
 - Do not emit extra fields such as `When do we mark device noncompliant?` or any other custom label unless the user explicitly requests that exact field
 - If the source contains policy-specific or internal-only fields, fold that information into the nearest approved field rather than introducing a new label
-- Normalize every field to `| Label | Value |` segments and never use inline `Label: Value` formatting
+- Never use a leading `###` or any other markdown heading prefix for the label line; the output must be plain pipe-delimited content only
+- Each field must be written exactly as `| Label | Value |`, with the leading pipe before the label and the trailing pipe after the value; do not use `Label: Value`, `Label | Value`, or any other format
+- Example: `| What does this do? | Helps customers understand the purpose of this policy. |`
 
 For all other document types, ask the user which format they want:
 - **HTML** — for direct ProProfs KB import (raw HTML)
@@ -106,7 +108,7 @@ Before sending the final answer for Description Field, self-check:
 3. Output is exactly one `text` fenced block
 4. Output contains one single-line pipe-delimited value only
 5. No extra prose before or after the block
-6. Only approved labels are present, and no extra labels such as `When do we mark device noncompliant?` appear
+6. Only approved labels are present, and no extra labels such as `When do we mark device noncompliant?` or any heading-style prefix such as `###` appear
 7. All fields use normalized `| Label | Value |` segments
 
 Direct mapping exception:
