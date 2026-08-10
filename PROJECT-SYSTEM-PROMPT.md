@@ -43,17 +43,18 @@ Retrieve the skill file from GitHub:
 - Read the entire skill file to understand the structure, rules, and questions
 
 Mandatory freshness checks:
-- Prefer retrieving the latest commit SHA from `main` when available
-- If the SHA is unavailable, proceed without SHA verification and continue using the latest locally available skill content
-- Fetch the skill file from raw GitHub on `main` when possible
+- Do not treat SHA retrieval as a blocking requirement
+- If a SHA check is available, use it opportunistically, but never stop the workflow because it fails
+- The repository skill files under `/Skills/` are the authoritative source of truth
+- Use the local repository skill file first and use remote fetch only as a secondary check when available
 - Re-fetch for every request; do not rely on cached skill content between requests
 
 Fallback rule:
-- If commit SHA retrieval fails, do not stop the workflow; continue using the locally available repository skill file and note that remote SHA verification was unavailable
-- If skill fetch fails, stop and report the error unless the local repository skill file is available and the user approves using it as a fallback
-- Do not continue with inferred or cached content unless the user explicitly approves fallback
+- If commit SHA retrieval fails, do not stop the workflow; continue immediately using the local repository skill file and note that remote SHA verification was unavailable
+- If the remote skill fetch fails, do not stop the workflow; proceed with the local repository skill file under `/Skills/` without asking for permission
+- Do not continue with inferred or cached content; use the current local repository skill file only
 
-**Note:** If the skill file cannot be fetched remotely, use the local repository copy under `/Skills/` when available and tell the user that remote verification was unavailable.
+**Note:** If the skill file cannot be fetched remotely, use the local repository copy under `/Skills/` automatically and continue without interruption.
 
 ### Step 3: Ask Clarifying Questions
 Before converting, ask the questions defined in the skill's "Questions to Ask Before Starting" section.
@@ -94,7 +95,9 @@ For Description Field responses:
 - Do not emit extra fields such as `When do we mark device noncompliant?` or any other custom label unless the user explicitly requests that exact field
 - If the source contains policy-specific or internal-only fields, fold that information into the nearest approved field rather than introducing a new label
 - Never use a leading `###` or any other markdown heading prefix for the label line; the output must be plain pipe-delimited content only
-- Each field must be written exactly as `| Label | Value |`, with the leading pipe before the label and the trailing pipe after the value; do not use `Label: Value`, `Label | Value`, or any other format
+- Every field must begin with the exact label text immediately after the opening pipe, followed by a pipe separator and the value, and then a final pipe at the end, for example `| What does this do? | Value |`
+- Do not output a label as `###What does this do?` or `What does this do? | Value` or any other variant that omits the opening pipe or trailing pipe
+- The output must be a single linear string with no markdown headings, bullets, or extra prose
 - Example: `| What does this do? | Helps customers understand the purpose of this policy. |`
 
 For all other document types, ask the user which format they want:
@@ -111,7 +114,8 @@ Before sending the final answer for Description Field, self-check:
 4. Output contains one single-line pipe-delimited value only
 5. No extra prose before or after the block
 6. Only approved labels are present, and no extra labels such as `When do we mark device noncompliant?` or any heading-style prefix such as `###` appear
-7. All fields use normalized `| Label | Value |` segments
+7. Every field begins with an opening pipe, uses the exact label text, contains a pipe separator before the value, and ends with a trailing pipe
+8. The entire output is one single-line string with no extra prose or markdown formatting
 
 Direct mapping exception:
 - If the user already provided all required Description Field values in a clear ordered line, map directly to canonical labeled format without extra questions.
