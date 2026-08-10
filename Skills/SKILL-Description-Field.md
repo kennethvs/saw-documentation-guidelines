@@ -21,6 +21,20 @@ Every Description Field request should produce one final output only:
 
 The final output must be a single-line string that preserves the visible Intune Description field format.
 
+Canonical base template (guidance):
+
+```text
+| What does this do? | <Description text> |
+| Why should you use this? | <Description text> |
+| What is the end-user impact? | <Description text> |
+| Learn more | [<Link description>](<Hyperlink address>) |
+```
+
+Flattening rule:
+- Use the canonical base template as the source structure
+- Flatten it into one single-line pipe-delimited value for final output
+- Keep the same field order during flattening
+
 Presentation requirement:
 - Return the final description field inside one plain text canvas-style block, ready for copy paste
 - Use a single fenced `text` code block containing only the final pipe-delimited string
@@ -61,7 +75,7 @@ Rules:
 - If a stricter platform-specific limit is known, apply that limit instead (for example M365 Apps 1000, OEMConfig 260)
 - Output the final answer as one line unless the user explicitly asks for line breaks
 - Preserve the pipe characters `|` exactly as visible separators
-- Keep the core field order aligned across all variants: `Category:` if present, `What does this do?`, `Why should you use this?`, `What is the end-user impact?`, `Learn more`, and `Version <Major.Minor>` if present
+- Keep the core field order aligned across all variants: `What does this do?`, `Why should you use this?`, `What is the end-user impact?`, `Learn more`; include `Category:` before these fields if present; include `Version <Major.Minor>` after these fields if present
 - Do not convert the output into markdown headings, bullets, tables, HTML, JSON, YAML, or prose explanation
 - Do not include analysis sections such as Context Summary, Constraints, Candidate Descriptions, Recommended Description, Template Output, or Validation Checklist unless the user explicitly asks for them
 - Replace all placeholders with concrete text before final output

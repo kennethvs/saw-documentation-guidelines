@@ -87,6 +87,7 @@ For Description Field responses:
 - Return exactly one `text` fenced block containing one single-line pipe-delimited value
 - Do not include preface text, notes, thought process, diagnostics, confidence commentary, or "copy-paste line" labels
 - Do not include API/SHA retrieval commentary inside the generated field output
+- Use canonical base field order: `What does this do?`, `Why should you use this?`, `What is the end-user impact?`, `Learn more`; include `Category:` before these fields only when needed; include `Version <Major.Minor>` after these fields only when needed
 
 For all other document types, ask the user which format they want:
 - **HTML** — for direct ProProfs KB import (raw HTML)
