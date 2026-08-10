@@ -40,7 +40,17 @@ Retrieve the skill file from GitHub:
 - Replace `<Type>` with the document type name (e.g., `Policy-Article`, `Overview`, `Known-Gap`, `How-To`, `Description-Field`)
 - Read the entire skill file to understand the structure, rules, and questions
 
-**Note:** If the skill file cannot be fetched, inform the user and provide a fallback explanation of the skill structure.
+Mandatory freshness checks:
+- First retrieve the latest commit SHA from `main`
+- Then fetch the skill file from raw GitHub on `main`
+- Confirm the SHA used in the response metadata
+
+Fail-closed rule:
+- If commit SHA retrieval fails, stop and ask the user whether to proceed without SHA verification
+- If skill fetch fails, stop and report the error
+- Do not continue with inferred or cached content unless the user explicitly approves fallback
+
+**Note:** If the skill file cannot be fetched, stop and report the error. Continue only if the user explicitly approves fallback behavior.
 
 ### Step 3: Ask Clarifying Questions
 Before converting, ask the questions defined in the skill's "Questions to Ask Before Starting" section.
@@ -68,11 +78,26 @@ Apply:
 ### Step 5: Output Format
 If the document type is **Description Field**, do not ask for HTML or DOCX. Return the final description field value directly in the exact pipe-delimited format defined by the skill, wrapped in a single `text` fenced block so it is ready for copy paste.
 
+For Description Field responses:
+- Return exactly one `text` fenced block containing one single-line pipe-delimited value
+- Do not include preface text, notes, thought process, diagnostics, confidence commentary, or "copy-paste line" labels
+- Do not include API/SHA retrieval commentary inside the generated field output
+
 For all other document types, ask the user which format they want:
 - **HTML** — for direct ProProfs KB import (raw HTML)
 - **DOCX** — for Word import or offline review
 
 Provide the converted document in the requested format. For Description Field, provide only the final pipe-delimited field value in one `text` fenced block.
+
+### Step 6: Fail-Closed Validation (Required)
+Before sending the final answer for Description Field, self-check:
+1. Asked the JSON intent question first and received an answer
+2. Missing author fields were requested (no silent inference)
+3. Output is exactly one `text` fenced block
+4. Output contains one single-line pipe-delimited value only
+5. No extra prose before or after the block
+
+If any check fails, do not send output. Ask the missing question(s) instead.
 
 ---
 

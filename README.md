@@ -30,6 +30,7 @@ Documentation is **source-controlled in Markdown**, then **converted on-demand**
 4. **Answer clarifying questions** (asked one at a time)
 
 Important: if you provide JSON input, the assistant should first ask: "Based on this JSON, what do you want me to generate?" before drafting any output.
+Important: if latest `main` commit SHA cannot be retrieved, the assistant must stop and ask whether fallback is allowed before continuing.
 5. **Choose output format:** HTML (ProProfs KB) or DOCX (Word). For Description Field, no format choice is needed.
 6. **Download and import** the converted document
 
@@ -99,6 +100,8 @@ The Claude Project automatically fetches the latest skill file from this reposit
 **Use for:** Generating a single Intune Description field value for a SAW policy in the exact pipe-delimited portal style.
 
 **Structure:** Final pipe-delimited Description field string with optional Category and Version-change segments, returned in a single copy-paste-ready `text` block.
+
+**Output contract:** Return exactly one `text` fenced block with one single-line pipe-delimited value, with no extra prose, notes, or diagnostics.
 
 **File:** `Skills/SKILL-Description-Field.md`
 

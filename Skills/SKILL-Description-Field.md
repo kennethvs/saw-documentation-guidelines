@@ -26,6 +26,11 @@ Presentation requirement:
 - Use a single fenced `text` code block containing only the final pipe-delimited string
 - Do not add any text before or after the block unless the user explicitly asks for explanation
 
+Fail-closed output contract:
+- If any required input is missing, ask for it and stop
+- Never output thought process, notes, diagnostics, issue flags, confidence commentary, or "copy-paste line" helper text
+- Never output SHA/API fetch status inside the generated description content
+
 Default structure:
 
 ```text
@@ -71,6 +76,7 @@ Rules:
 - Use the bare version value in the label, for example `Version 1.0`, not `Version v1.0`, unless the source explicitly requires the `v`
 - The change explanation must be concise and specific to what changed
 - If required author fields are null or missing (for example description text or version-change explanation), ask the user for the exact value before generating
+- If a version is present but no change explanation is available, ask for the explanation and stop
 - Do not infer missing author intent from Microsoft Learn unless the user explicitly approves inference
 - Do not append version/change notes outside the pipe-delimited structure
 - Do not leave unresolved placeholders such as `<>`
@@ -127,5 +133,7 @@ Before returning the final string, confirm:
 - HTML has been removed
 - Only verified content is present
 - Optional segments are included only when justified by the source
+- There is no extra text before or after the fenced block
+- There are no notes, warnings, diagnostics, or helper labels in the final output
 
 If any check fails, revise once and return only the corrected final string.
