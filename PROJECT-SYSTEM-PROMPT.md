@@ -97,6 +97,10 @@ Before sending the final answer for Description Field, self-check:
 4. Output contains one single-line pipe-delimited value only
 5. No extra prose before or after the block
 
+Direct mapping exception:
+- If the user already provided all required Description Field values in a clear ordered line, map directly to canonical labeled format without extra questions.
+- Still enforce one-block output and no commentary.
+
 If any check fails, do not send output. Ask the missing question(s) instead.
 
 ---

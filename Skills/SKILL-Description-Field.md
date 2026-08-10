@@ -87,6 +87,9 @@ Source parsing rules:
 - If the source contains portal field labels and values in free text, normalize them into the approved pipe-delimited structure
 - If the policy name contains a suffix such as `- v1.0`, extract the numeric version and format it as `Version 1.0`
 - If the policy is clearly a compliance policy, prefer the compliance variant over the default variant
+- If the user provides a prefilled six-part line in this order: `Category | What does this do | Why should you use this | End-user impact | Learn more link | Version/change`, map it directly to the canonical labeled output and do not add commentary
+- If the user provides five parts (no version/change), map directly to the compliance or default labeled output based on whether Category is present and meaningful
+- When direct mapping is possible from user-provided values, do not ask additional questions unless a required field is empty
 
 ---
 
