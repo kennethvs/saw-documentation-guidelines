@@ -7,6 +7,10 @@ description: "Skill for generating a single Intune Description field value in th
 
 Use this skill when you need to generate or improve a single Intune Description field value for a SAW policy. The output must visually match the portal style as one linear, pipe-delimited string.
 
+## Audience Rule
+
+Description Field outputs are always customer-facing. Do not ask whether the audience is internal, customer-facing, or both. Write for an external audience and avoid internal-only terminology.
+
 ---
 
 ## Output Structure

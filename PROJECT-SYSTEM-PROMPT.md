@@ -43,20 +43,22 @@ Retrieve the skill file from GitHub:
 - Read the entire skill file to understand the structure, rules, and questions
 
 Mandatory freshness checks:
-- First retrieve the latest commit SHA from `main`
-- Then fetch the skill file from raw GitHub on `main`
-- Confirm the SHA used in the response metadata
+- Prefer retrieving the latest commit SHA from `main` when available
+- If the SHA is unavailable, proceed without SHA verification and continue using the latest locally available skill content
+- Fetch the skill file from raw GitHub on `main` when possible
 - Re-fetch for every request; do not rely on cached skill content between requests
 
-Fail-closed rule:
-- If commit SHA retrieval fails, stop and ask the user whether to proceed without SHA verification
-- If skill fetch fails, stop and report the error
+Fallback rule:
+- If commit SHA retrieval fails, do not stop the workflow; continue using the locally available repository skill file and note that remote SHA verification was unavailable
+- If skill fetch fails, stop and report the error unless the local repository skill file is available and the user approves using it as a fallback
 - Do not continue with inferred or cached content unless the user explicitly approves fallback
 
-**Note:** If the skill file cannot be fetched, stop and report the error. Continue only if the user explicitly approves fallback behavior.
+**Note:** If the skill file cannot be fetched remotely, use the local repository copy under `/Skills/` when available and tell the user that remote verification was unavailable.
 
 ### Step 3: Ask Clarifying Questions
 Before converting, ask the questions defined in the skill's "Questions to Ask Before Starting" section.
+
+For Description Field requests, do not ask audience questions such as internal, customer-facing, or both. Treat the output as customer-facing by default and use the description-field skill's audience guidance.
 
 If the user provided JSON input, always ask this first:
 > "Based on this JSON, what do you want me to generate?"
