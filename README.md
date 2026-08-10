@@ -315,6 +315,9 @@ Always mention supported platforms when describing compliance policies or featur
 - **M365 Apps policy descriptions:** 1000 characters
 - **OEMConfig descriptions:** 260 characters (maximum)
 
+Default handling rule:
+- When target type is unknown or no explicit limit is provided, use a default maximum of 1024 characters.
+
 ### SAW Baseline Context
 When documenting a policy, always explain:
 - **Why SAW deploys this policy** — operational or security objective

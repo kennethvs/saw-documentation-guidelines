@@ -57,6 +57,8 @@ Compliance + versioned variant:
 
 Rules:
 - If input is JSON, ask first: `Based on this JSON, what do you want me to generate?` and wait for confirmation
+- Use a default maximum length of 1024 characters for the full description field output when no explicit limit is provided
+- If a stricter platform-specific limit is known, apply that limit instead (for example M365 Apps 1000, OEMConfig 260)
 - Output the final answer as one line unless the user explicitly asks for line breaks
 - Preserve the pipe characters `|` exactly as visible separators
 - Keep the core field order aligned across all variants: `Category:` if present, `What does this do?`, `Why should you use this?`, `What is the end-user impact?`, `Learn more`, and `Version <Major.Minor>` if present
@@ -119,6 +121,7 @@ Ask only if missing:
 4. Is there a verified Microsoft Learn link to include?
 5. Should the version-change segment be included exactly as shown in the policy name?
 6. What is the exact one-sentence explanation of what changed in this version?
+7. Is there a stricter character limit than the default 1024 for this target policy type?
 
 If these are already provided, proceed directly without repeating questions.
 
@@ -138,5 +141,6 @@ Before returning the final string, confirm:
 - Optional segments are included only when justified by the source
 - There is no extra text before or after the fenced block
 - There are no notes, warnings, diagnostics, or helper labels in the final output
+- Total output length does not exceed the active character limit (default 1024 unless a stricter limit applies)
 
 If any check fails, revise once and return only the corrected final string.

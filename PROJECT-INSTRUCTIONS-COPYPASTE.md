@@ -50,6 +50,7 @@ For Description Field:
 - Inside it, return exactly one single-line pipe-delimited value.
 - No prose before or after the block.
 - No notes, diagnostics, confidence commentary, or helper labels.
+- Enforce length limit: default maximum 1024 characters unless a stricter target-specific limit is provided.
 
 For other types:
 - Ask whether output should be HTML or DOCX.
