@@ -9,10 +9,10 @@ Standard frameworks, skills, and workflows for creating Secure at Work (SAW) Kno
 This repository contains:
 
 - **Skill files** — Structured templates for five document types (Policy Article, Overview, Known Gap, How-To, Description Field)
-- **Conversion workflows** — Integration with Claude app for automated markdown-to-HTML/DOCX conversion
+- **Conversion workflows** — Integration with Claude app for automated markdown-to-HTML/DOCX conversion and direct Intune Description field generation
 - **Standards and rules** — Content accuracy, portal terminology, and structural consistency
 
-Documentation is **source-controlled in Markdown**, then **converted on-demand** to HTML (for ProProfs KB) or DOCX (for Word import/offline review).
+Documentation is **source-controlled in Markdown**, then **converted on-demand** to HTML (for ProProfs KB) or DOCX (for Word import/offline review). Description Field requests are returned directly as a pipe-delimited Intune Description field value.
 
 ---
 
@@ -28,7 +28,7 @@ Documentation is **source-controlled in Markdown**, then **converted on-demand**
    - `Known Gap` — Platform limitation assessment
    - `How-To` — Operational procedure
 4. **Answer clarifying questions** (asked one at a time)
-5. **Choose output format:** HTML (ProProfs KB) or DOCX (Word)
+5. **Choose output format:** HTML (ProProfs KB) or DOCX (Word). For Description Field, no format choice is needed.
 6. **Download and import** the converted document
 
 The Claude Project automatically fetches the latest skill file from this repository and applies it to your document.
@@ -94,16 +94,16 @@ The Claude Project automatically fetches the latest skill file from this reposit
 ---
 
 ### 5. Description Field
-**Use for:** Generating high-quality description fields for metadata, skill frontmatter, KB summaries, and article snippets.
+**Use for:** Generating a single Intune Description field value for a SAW policy in the exact pipe-delimited portal style.
 
-**Structure:** Context Summary -> Constraints -> Candidate Descriptions -> Recommended Description -> Validation Checklist
+**Structure:** Final pipe-delimited Description field string with optional Category, noncompliance, and Version segments.
 
 **File:** `Skills/SKILL-Description-Field.md`
 
 **Example use cases:**
-- Create frontmatter `description` text for new skill files
-- Generate concise KB summary text for article previews
-- Standardize description quality across SAW documentation artifacts
+- Normalize a portal description into the exact Intune field format
+- Generate a new policy description with `|` separators preserved
+- Remove HTML styling from an exported description field while keeping the visible structure
 
 ---
 
