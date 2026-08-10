@@ -88,6 +88,9 @@ For Description Field responses:
 - Do not include preface text, notes, thought process, diagnostics, confidence commentary, or "copy-paste line" labels
 - Do not include API/SHA retrieval commentary inside the generated field output
 - Use canonical base field order: `What does this do?`, `Why should you use this?`, `What is the end-user impact?`, `Learn more`; include `Category:` before these fields only when needed; include `Version <Major.Minor>` after these fields only when needed
+- Restrict labels to: `Category:`, `What does this do?`, `Why should you use this?`, `What is the end-user impact?`, `Learn more`, and `Version <Major.Minor>`
+- Do not emit extra fields (for example `When do we mark device noncompliant?`) unless the user explicitly requests that exact field
+- Normalize every field to `| Label | Value |` segments and never use inline `Label: Value` formatting
 
 For all other document types, ask the user which format they want:
 - **HTML** — for direct ProProfs KB import (raw HTML)
@@ -102,6 +105,8 @@ Before sending the final answer for Description Field, self-check:
 3. Output is exactly one `text` fenced block
 4. Output contains one single-line pipe-delimited value only
 5. No extra prose before or after the block
+6. Only approved labels are present
+7. All fields use normalized `| Label | Value |` segments
 
 Direct mapping exception:
 - If the user already provided all required Description Field values in a clear ordered line, map directly to canonical labeled format without extra questions.

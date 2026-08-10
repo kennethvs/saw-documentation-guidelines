@@ -76,6 +76,10 @@ Rules:
 - Output the final answer as one line unless the user explicitly asks for line breaks
 - Preserve the pipe characters `|` exactly as visible separators
 - Keep the core field order aligned across all variants: `What does this do?`, `Why should you use this?`, `What is the end-user impact?`, `Learn more`; include `Category:` before these fields if present; include `Version <Major.Minor>` after these fields if present
+- Allowed labels are restricted to: `Category:`, `What does this do?`, `Why should you use this?`, `What is the end-user impact?`, `Learn more`, and `Version <Major.Minor>`
+- Do not output additional labels (for example `When do we mark device noncompliant?`) unless the user explicitly asks for that exact field
+- Normalize label/value formatting to `| <Label> | <Value> |` segments only
+- Do not use inline `Label: Value` formatting inside a segment; convert it to normalized pipe segments
 - Do not convert the output into markdown headings, bullets, tables, HTML, JSON, YAML, or prose explanation
 - Do not include analysis sections such as Context Summary, Constraints, Candidate Descriptions, Recommended Description, Template Output, or Validation Checklist unless the user explicitly asks for them
 - Replace all placeholders with concrete text before final output
@@ -101,6 +105,8 @@ Source parsing rules:
 - If the source already contains a pipe-delimited description, preserve the structure and only clean the content
 - If the source contains HTML tags, strip them unless they are part of a verified markdown link label or URL
 - If the source contains portal field labels and values in free text, normalize them into the approved pipe-delimited structure
+- If source text includes non-approved labels, remove them unless the user explicitly asked for them
+- If source text uses `Label: Value` inline style, convert it to normalized `| Label | Value |` segments
 - If the policy name contains a suffix such as `- v1.0`, extract the numeric version and format it as `Version 1.0`
 - If the policy is clearly a compliance policy, prefer the compliance variant over the default variant
 - If the user provides a prefilled six-part line in this order: `Category | What does this do | Why should you use this | End-user impact | Learn more link | Version/change`, map it directly to the canonical labeled output and do not add commentary
@@ -149,6 +155,8 @@ Before returning the final string, confirm:
 - The output is wrapped in a single `text` fenced block for copy paste
 - The visible separators match the portal style
 - The core fields appear in the canonical order
+- Only approved labels are present
+- Every field is represented as normalized `| Label | Value |` segments
 - The `Learn more` field is present and uses `[]()` markdown link syntax, unless a verified link is unavailable
 - HTML has been removed
 - Only verified content is present
