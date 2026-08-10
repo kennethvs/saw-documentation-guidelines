@@ -14,6 +14,11 @@ This repository contains:
 
 Documentation is **source-controlled in Markdown**, then **converted on-demand** to HTML (for ProProfs KB) or DOCX (for Word import/offline review). Description Field requests are returned directly as a pipe-delimited Intune Description field value.
 
+Maintenance model:
+- Keep project instructions stable and minimal (bootstrap behavior only)
+- Keep document behavior in `/Skills/` files as the source of truth
+- Re-fetch skills from GitHub `main` for every request so updates apply immediately
+
 ---
 
 ## Quick Start
@@ -222,6 +227,18 @@ Examples:
 5. **Download** the converted file
 
 The Claude Project handles skill fetching and applies the appropriate structure automatically.
+
+### Recommended Instruction Strategy
+
+To avoid frequent project-instruction rewrites:
+
+1. Keep the project instruction short and focused on fetch/validation guardrails
+2. Store all generation rules in `/Skills/`
+3. Update only the relevant skill file when behavior changes
+4. Require per-request fetch of latest `main` SHA and matching raw skill file
+5. Fail closed on fetch errors unless user explicitly approves fallback
+
+Use `PROJECT-INSTRUCTIONS-COPYPASTE.md` as the ready-to-paste project instruction template.
 
 ---
 
