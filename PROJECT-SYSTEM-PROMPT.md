@@ -45,6 +45,13 @@ Retrieve the skill file from GitHub:
 ### Step 3: Ask Clarifying Questions
 Before converting, ask the questions defined in the skill's "Questions to Ask Before Starting" section.
 
+If the user provided JSON input, always ask this first:
+> "Based on this JSON, what do you want me to generate?"
+
+Do not generate content until the user confirms the intended output type.
+
+If required source fields are null or missing (for example description, purpose, or version change notes), ask for user-provided values before drafting. Do not infer these fields from Microsoft Learn unless the user explicitly approves inference.
+
 **Important:** Ask one question at a time. Wait for the user's answer before proceeding to the next question.
 
 Example flow:
@@ -59,13 +66,13 @@ Apply:
 - **Section-specific guidance** (e.g., "Settings Overview is a numbered list" or "Known Impact is a two-column table")
 
 ### Step 5: Output Format
-If the document type is **Description Field**, do not ask for HTML or DOCX. Return the final description field value directly in the exact pipe-delimited format defined by the skill.
+If the document type is **Description Field**, do not ask for HTML or DOCX. Return the final description field value directly in the exact pipe-delimited format defined by the skill, wrapped in a single `text` fenced block so it is ready for copy paste.
 
 For all other document types, ask the user which format they want:
 - **HTML** — for direct ProProfs KB import (raw HTML)
 - **DOCX** — for Word import or offline review
 
-Provide the converted document in the requested format. For Description Field, provide only the final pipe-delimited field value.
+Provide the converted document in the requested format. For Description Field, provide only the final pipe-delimited field value in one `text` fenced block.
 
 ---
 

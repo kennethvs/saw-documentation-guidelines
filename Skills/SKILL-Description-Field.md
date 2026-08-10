@@ -21,6 +21,11 @@ Every Description Field request should produce one final output only:
 
 The final output must be a single-line string that preserves the visible Intune Description field format.
 
+Presentation requirement:
+- Return the final description field inside one plain text canvas-style block, ready for copy paste
+- Use a single fenced `text` code block containing only the final pipe-delimited string
+- Do not add any text before or after the block unless the user explicitly asks for explanation
+
 Default structure:
 
 ```text
@@ -46,6 +51,7 @@ Compliance + versioned variant:
 ```
 
 Rules:
+- If input is JSON, ask first: `Based on this JSON, what do you want me to generate?` and wait for confirmation
 - Output the final answer as one line unless the user explicitly asks for line breaks
 - Preserve the pipe characters `|` exactly as visible separators
 - Keep the core field order aligned across all variants: `Category:` if present, `What does this do?`, `Why should you use this?`, `What is the end-user impact?`, `Learn more`, and `Version <Major.Minor>` if present
@@ -64,6 +70,8 @@ Rules:
 - When a version is present in the policy name or source, include `Version <Major.Minor> | <Explanation on what changed>` as part of the aligned field set
 - Use the bare version value in the label, for example `Version 1.0`, not `Version v1.0`, unless the source explicitly requires the `v`
 - The change explanation must be concise and specific to what changed
+- If required author fields are null or missing (for example description text or version-change explanation), ask the user for the exact value before generating
+- Do not infer missing author intent from Microsoft Learn unless the user explicitly approves inference
 - Do not append version/change notes outside the pipe-delimited structure
 - Do not leave unresolved placeholders such as `<>`
 
@@ -97,10 +105,11 @@ Source parsing rules:
 Ask only if missing:
 
 1. What is the exact policy name?
-2. Is this a compliance policy, configuration profile, remediation, or another policy type?
-3. Is there a verified Microsoft Learn link to include?
-4. Should the version-change segment be included exactly as shown in the policy name?
-5. What is the exact one-sentence explanation of what changed in this version?
+2. Based on this JSON, what do you want me to generate?
+3. Is this a compliance policy, configuration profile, remediation, or another policy type?
+4. Is there a verified Microsoft Learn link to include?
+5. Should the version-change segment be included exactly as shown in the policy name?
+6. What is the exact one-sentence explanation of what changed in this version?
 
 If these are already provided, proceed directly without repeating questions.
 
@@ -111,6 +120,7 @@ If these are already provided, proceed directly without repeating questions.
 Before returning the final string, confirm:
 
 - The output is one pipe-delimited line
+- The output is wrapped in a single `text` fenced block for copy paste
 - The visible separators match the portal style
 - The core fields appear in the canonical order
 - The `Learn more` field is present and uses `[]()` markdown link syntax, unless a verified link is unavailable

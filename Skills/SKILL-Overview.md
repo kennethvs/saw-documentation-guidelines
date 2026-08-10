@@ -197,6 +197,8 @@ For Joost Gelijsteen references, include as additional resource after Learn link
 
 **Accuracy first.** Verify feature structure against Microsoft Learn or production observation. If details cannot be confirmed, state so in the confidence note.
 
+If key author fields are null or missing (for example feature purpose text, SAW rationale, or version change notes), ask the user for those values first. Do not infer these fields from Microsoft Learn unless the user explicitly approves inference.
+
 **No fabrication.** Do not describe features or workflows that do not exist.
 
 **Portal terminology.** Use exact names:
@@ -212,9 +214,10 @@ For Joost Gelijsteen references, include as additional resource after Learn link
 
 ## Questions to Ask Before Starting
 
-1. Is this overview for a multi-policy feature set, platform-specific feature, or a specific compliance/security capability?
-2. Are there existing policy articles related to this feature that should be listed in Related KB Articles?
-3. Who is the primary audience — internal SAW team, customers, or both?
+1. Based on this JSON, what do you want me to generate?
+2. Is this overview for a multi-policy feature set, platform-specific feature, or a specific compliance/security capability?
+3. Are there existing policy articles related to this feature that should be listed in Related KB Articles?
+4. Who is the primary audience — internal SAW team, customers, or both?
 
 ---
 

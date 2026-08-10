@@ -265,6 +265,8 @@ One `<li>` per link. Include:
 
 **Accuracy first.** Test the procedure in a staging or non-production environment before documenting. Verify every command and every step works as documented.
 
+If key author fields are null or missing (for example procedure purpose, expected outcome, or rollback guidance), ask the user for those values first. Do not infer these fields from Microsoft Learn unless the user explicitly approves inference.
+
 **Clarity over brevity.** Use clear, step-by-step language. Include full code blocks (not abbreviated). Assume the reader is not familiar with the procedure.
 
 **Screenshots and examples.** Include portal screenshots, code snippets, and expected output to help readers confirm they are on the right track.
@@ -279,11 +281,12 @@ One `<li>` per link. Include:
 
 ## Questions to Ask Before Starting
 
-1. What is the intended audience — internal SAW team, MSP technicians, or customers?
-2. Has this procedure been tested end-to-end? In which environments?
-3. What are the most common issues or failure points?
-4. How frequently will this procedure be executed?
-5. Is the procedure reversible, and should rollback instructions be included?
+1. Based on this JSON, what do you want me to generate?
+2. What is the intended audience — internal SAW team, MSP technicians, or customers?
+3. Has this procedure been tested end-to-end? In which environments?
+4. What are the most common issues or failure points?
+5. How frequently will this procedure be executed?
+6. Is the procedure reversible, and should rollback instructions be included?
 
 ---
 

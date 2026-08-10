@@ -200,6 +200,8 @@ One `<li>` per link. Prioritize official documentation that confirms the gap or 
 
 **No speculation.** Do not claim a gap exists if it is untested or unverified.
 
+If key author fields are null or missing (for example gap decision rationale, risk acceptance statement, or review trigger), ask the user for those values first. Do not infer these fields from Microsoft Learn unless the user explicitly approves inference.
+
 **Fair assessment.** Evaluate all reasonable workarounds. Do not dismiss workarounds without testing or clear reasoning.
 
 **Decision authority.** Only SAW leadership can formally accept a gap. State who approved the decision and when.
@@ -210,10 +212,11 @@ One `<li>` per link. Prioritize official documentation that confirms the gap or 
 
 ## Questions to Ask Before Starting
 
-1. Has this gap been verified against Microsoft Learn or Microsoft support documentation?
-2. What workarounds or alternative approaches have been evaluated?
-3. Who in SAW is the decision-maker for accepting or rejecting this gap?
-4. When should this decision be revisited (e.g., annual review, tied to a feature request, or triggered by a specific event)?
+1. Based on this JSON, what do you want me to generate?
+2. Has this gap been verified against Microsoft Learn or Microsoft support documentation?
+3. What workarounds or alternative approaches have been evaluated?
+4. Who in SAW is the decision-maker for accepting or rejecting this gap?
+5. When should this decision be revisited (e.g., annual review, tied to a feature request, or triggered by a specific event)?
 
 ---
 

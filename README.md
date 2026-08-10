@@ -28,6 +28,8 @@ Documentation is **source-controlled in Markdown**, then **converted on-demand**
    - `Known Gap` — Platform limitation assessment
    - `How-To` — Operational procedure
 4. **Answer clarifying questions** (asked one at a time)
+
+Important: if you provide JSON input, the assistant should first ask: "Based on this JSON, what do you want me to generate?" before drafting any output.
 5. **Choose output format:** HTML (ProProfs KB) or DOCX (Word). For Description Field, no format choice is needed.
 6. **Download and import** the converted document
 
@@ -96,7 +98,7 @@ The Claude Project automatically fetches the latest skill file from this reposit
 ### 5. Description Field
 **Use for:** Generating a single Intune Description field value for a SAW policy in the exact pipe-delimited portal style.
 
-**Structure:** Final pipe-delimited Description field string with optional Category, noncompliance, and Version segments.
+**Structure:** Final pipe-delimited Description field string with optional Category and Version-change segments, returned in a single copy-paste-ready `text` block.
 
 **File:** `Skills/SKILL-Description-Field.md`
 
@@ -133,6 +135,7 @@ These rules apply across all skills and documents:
 - If source material is unavailable, search Microsoft Learn before documenting
 - State assumptions clearly in the Documentation Confidence section
 - Omit unverified details rather than guess
+- If key author fields are missing or null (for example description, purpose, or version change notes), ask for user-provided values first; only infer from Microsoft Learn when explicitly approved by the user
 
 ### No Fabrication
 - Do not describe settings or features that do not exist

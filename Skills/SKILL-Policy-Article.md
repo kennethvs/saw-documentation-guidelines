@@ -152,6 +152,8 @@ For content referencing Joost Gelijsteen (joostgelijsteen.com), include as addit
 - State clearly in confidence note what was and was not verified
 - Omit unverified details rather than guess
 
+If key author fields are null or missing (for example policy description, purpose rationale, or version change notes), ask the user for those values first. Do not infer these fields from Microsoft Learn unless the user explicitly approves inference.
+
 **No fabrication.** If asked about a setting that does not exist in Intune, say so. Do not describe a setting that cannot be verified.
 
 **Portal terminology.** Use exact terminology from Intune admin center:
@@ -178,8 +180,9 @@ Also note that these policies are excluded from intune-backup and intune-policy-
 If the user provides a policy name but no source material:
 
 1. Can you share a screenshot of the configuration settings from the Intune portal, or a JSON export of the policy?
-2. What is the intended audience — internal IT team, customer-facing KB, or both?
-3. Is this policy part of a multi-article set (e.g., related policies in a feature category)?
+2. Based on this JSON, what do you want me to generate?
+3. What is the intended audience — internal IT team, customer-facing KB, or both?
+4. Is this policy part of a multi-article set (e.g., related policies in a feature category)?
 
 If source material is provided, proceed directly—do not ask for what is already visible.
 
