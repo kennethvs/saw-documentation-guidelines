@@ -25,6 +25,12 @@ Every Description Field request should produce one final output only:
 
 The final output must be a single-line string that preserves the visible Intune Description field format.
 
+Canonical single-line example:
+
+```text
+| Category: | Compliance policy | What does this do? | Helps customers understand what the policy does. | Why should you use this? | Helps customers meet the required security baseline. | What is the end-user impact? | Low Impact. | Learn more | [Microsoft Learn](https://learn.microsoft.com/) | Version 1.0 | Initial release |
+```
+
 Canonical base template (guidance):
 
 ```text
@@ -38,6 +44,10 @@ Flattening rule:
 - Use the canonical base template as the source structure
 - Flatten it into one single-line pipe-delimited value for final output
 - Keep the same field order during flattening
+- Start with the base fields in this order: `What does this do?`, `Why should you use this?`, `What is the end-user impact?`, `Learn more`
+- If `Category:` is needed, insert it before the base fields
+- If a version segment is needed, append it after `Learn more`
+- Do not emit separate blocks for category, compliance, or version; merge them into one flattened line only
 
 Presentation requirement:
 - Return the final description field inside one plain text canvas-style block, ready for copy paste
@@ -95,12 +105,14 @@ Rules:
 - The `Learn more` value must use markdown link format: `[<Link description>](<Hyperlink address>)`
 - Use verified links only; if no verified link is available, use `TBD - link pending verification`
 - Include `Category:` only when the policy type is meaningful and known, such as `Compliance policy`
-- Include a version-change segment only when a version is present in the policy name or provided by the user
+- Treat a compliance policy as a category trigger when the source clearly indicates compliance, including policy type metadata such as `Compliance policy`, `compliance`, or an object/type value that indicates a compliance policy
+- Include a version-change segment only when a version is present in the policy name or provided by the user, or when the source clearly carries version metadata such as a version field or display name suffix
 - When a version is present in the policy name or source, include `Version <Major.Minor> | <Explanation on what changed>` as part of the aligned field set
 - Use the bare version value in the label, for example `Version 1.0`, not `Version v1.0`, unless the source explicitly requires the `v`
 - The change explanation must be concise and specific to what changed
 - If required author fields are null or missing (for example description text or version-change explanation), ask the user for the exact value before generating
 - If a version is present but no change explanation is available, ask for the explanation and stop
+- If the value text contains a literal pipe character `|`, replace it with `&#124;` so the single-line parse remains unambiguous
 - Do not infer missing author intent from Microsoft Learn unless the user explicitly approves inference
 - Do not append version/change notes outside the pipe-delimited structure
 - Do not leave unresolved placeholders such as `<>`
