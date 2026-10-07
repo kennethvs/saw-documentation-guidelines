@@ -9,7 +9,7 @@ Use this skill when you need to generate or improve a single Intune Description 
 
 ## Audience Rule
 
-Description Field outputs are always customer-facing. Do not ask whether the audience is internal, customer-facing, or both. Write for an external audience and avoid internal-only terminology.
+Description Field outputs should use neutral, customer-safe wording that is suitable for both internal and external audiences. Do not ask whether the audience is internal, customer-facing, or both. Avoid internal-only terminology unless the user explicitly requests it.
 
 ---
 
@@ -56,8 +56,13 @@ Presentation requirement:
 
 Fail-closed output contract:
 - If any required input is missing, ask for it and stop
+- If the source does not clearly provide Category: or Version <Major.Minor>, do not output a final description field yet; ask the user for the missing values first and wait for explicit confirmation before continuing
+- Do not guess or infer missing Category: or Version <Major.Minor> values from weak signals
+- Treat explicit evidence from the policy name, filename, or prior context in the same request as sufficient input for Category: or Version <Major.Minor>
+- Do not add a Category: segment unless the source clearly indicates a compliance or other meaningful category, or prior context explicitly identifies it as such
+- Do not add a Version <Major.Minor> segment unless the source clearly provides a version, such as a filename or policy-name suffix like `v1.0`, or the user explicitly provides one
 - Never output thought process, notes, diagnostics, issue flags, confidence commentary, or "copy-paste line" helper text
-- Never output SHA/API fetch status inside the generated description content
+- Never output API or skill-loading status inside the generated description content
 
 Default structure:
 
@@ -103,10 +108,12 @@ Rules:
 - Convert any HTML impact markup to plain text. Example: `<span style='color: green'>Low Impact.</span>` becomes `Low Impact.`
 - Always include the `Learn more` field in the output
 - The `Learn more` value must use markdown link format: `[<Link description>](<Hyperlink address>)`
+- When a relevant official Microsoft Learn article exists, use it as the default source for the `Learn more` link and for verified terminology
 - Use verified links only; if no verified link is available, use `TBD - link pending verification`
 - Include `Category:` only when the policy type is meaningful and known, such as `Compliance policy`
-- Treat a compliance policy as a category trigger when the source clearly indicates compliance, including policy type metadata such as `Compliance policy`, `compliance`, or an object/type value that indicates a compliance policy
+- Treat a compliance policy as a category trigger only when the source clearly indicates compliance, including policy type metadata such as `Compliance policy`, `compliance`, or an object/type value that indicates a compliance policy
 - Include a version-change segment only when a version is present in the policy name or provided by the user, or when the source clearly carries version metadata such as a version field or display name suffix
+- If the source does not clearly provide a category or version, do not invent one; ask the user for the missing value instead
 - When a version is present in the policy name or source, include `Version <Major.Minor> | <Explanation on what changed>` as part of the aligned field set
 - Use the bare version value in the label, for example `Version 1.0`, not `Version v1.0`, unless the source explicitly requires the `v`
 - The change explanation must be concise and specific to what changed
@@ -128,6 +135,23 @@ Source parsing rules:
 - If the user provides a prefilled six-part line in this order: `Category | What does this do | Why should you use this | End-user impact | Learn more link | Version/change`, map it directly to the canonical labeled output and do not add commentary
 - If the user provides five parts (no version/change), map directly to the compliance or default labeled output based on whether Category is present and meaningful
 - When direct mapping is possible from user-provided values, do not ask additional questions unless a required field is empty
+
+---
+
+## Writing Level: CEFR B2
+
+Write all generated prose at CEFR B2 (upper-intermediate) English level. Apply this to description values, version-change explanations, questions, and other permitted user-facing messages, for both internal and external audiences.
+
+- Use clear, familiar words and direct sentences. Prefer active voice when it makes the meaning clearer.
+- Keep one main idea per sentence. Split long sentences and avoid several nested clauses.
+- Avoid idioms, unnecessary jargon, formal wording, and abstract phrases. Keep necessary technical terms and explain unfamiliar terms or acronyms briefly when needed, within the active character limit.
+- Preserve exact product names, portal labels, policy and group names, setting values, commands, code, paths, URLs, and required output labels. Simplify the value text rather than changing these items.
+- Keep the full technical meaning, including conditions, risks, limitations, and uncertainty. Simplify the language without removing required detail or adding claims.
+- Examples elsewhere in this skill show structure and content. Rewrite their prose at B2 level before reuse, while preserving exact technical details.
+- B2 wording must still follow the single-line output contract, approved labels, field order, and character limit. Do not add explanations or a writing-level note outside the final block.
+
+**B2 value wording example (illustrative only, not a final output):**
+> Records which apps would be blocked without stopping them from running.
 
 ---
 
@@ -167,6 +191,9 @@ If these are already provided, proceed directly without repeating questions.
 
 Before returning the final string, confirm:
 
+- All generated prose follows the CEFR B2 writing rules above
+- Long or complex sentences have been rewritten and unfamiliar terms explained where needed, within the active character limit
+- The rewrite preserves technical meaning, exact names and values, and required labels
 - The output is one pipe-delimited line
 - The output is wrapped in a single `text` fenced block for copy paste
 - The visible separators match the portal style

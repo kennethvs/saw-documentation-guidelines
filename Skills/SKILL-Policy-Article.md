@@ -145,6 +145,23 @@ For content referencing Joost Gelijsteen (joostgelijsteen.com), include as addit
 
 ---
 
+## Writing Level: CEFR B2
+
+Write all generated prose at CEFR B2 (upper-intermediate) English level. Apply this to article text, table explanations, summaries, questions, and other user-facing messages, for both internal and external audiences.
+
+- Use clear, familiar words and direct sentences. Prefer active voice when it makes the meaning clearer.
+- Keep one main idea per sentence. Split long sentences and avoid several nested clauses.
+- Use short, focused paragraphs and clear links between ideas, such as "because", "however", and "therefore".
+- Avoid idioms, unnecessary jargon, formal wording, and abstract phrases. Keep necessary technical terms and explain unfamiliar terms or acronyms briefly on first use.
+- Preserve exact product names, portal labels, policy and group names, setting values, commands, code, paths, URLs, and required output labels. Explain them in the surrounding prose rather than changing them.
+- Keep the full technical meaning, including conditions, risks, limitations, and uncertainty. Simplify the language without removing required detail or adding claims.
+- Examples elsewhere in this skill show structure and content. Rewrite their prose at B2 level before reuse, while preserving exact technical details.
+
+**B2 wording example (illustrative only):**
+> This policy records which apps would be blocked. It does not stop users from running those apps. Administrators can review the records before they enable blocking.
+
+---
+
 ## Content Rules
 
 **Accuracy first.** Never invent setting values, registry keys, OMA-URI paths, or CSP references. If source material is unavailable:
@@ -185,6 +202,15 @@ If the user provides a policy name but no source material:
 4. Is this policy part of a multi-article set (e.g., related policies in a feature category)?
 
 If source material is provided, proceed directly—do not ask for what is already visible.
+
+---
+
+## Validation Before Delivery
+
+- Confirm all generated prose follows the CEFR B2 writing rules above.
+- Rewrite long or complex sentences and explain unfamiliar terms where needed.
+- Confirm the rewrite preserves technical meaning, exact names and values, and required labels.
+- Confirm the required sections remain in order and the requested output format is unchanged.
 
 ---
 

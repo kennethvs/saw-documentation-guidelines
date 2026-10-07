@@ -193,6 +193,23 @@ For Joost Gelijsteen references, include as additional resource after Learn link
 
 ---
 
+## Writing Level: CEFR B2
+
+Write all generated prose at CEFR B2 (upper-intermediate) English level. Apply this to article text, table explanations, summaries, questions, and other user-facing messages, for both internal and external audiences.
+
+- Use clear, familiar words and direct sentences. Prefer active voice when it makes the meaning clearer.
+- Keep one main idea per sentence. Split long sentences and avoid several nested clauses.
+- Use short, focused paragraphs and clear links between ideas, such as "because", "however", and "therefore".
+- Avoid idioms, unnecessary jargon, formal wording, and abstract phrases. Keep necessary technical terms and explain unfamiliar terms or acronyms briefly on first use.
+- Preserve exact product names, portal labels, policy and group names, setting values, commands, code, paths, URLs, and required output labels. Explain them in the surrounding prose rather than changing them.
+- Keep the full technical meaning, including conditions, risks, limitations, and uncertainty. Simplify the language without removing required detail or adding claims.
+- Examples elsewhere in this skill show structure and content. Rewrite their prose at B2 level before reuse, while preserving exact technical details.
+
+**B2 wording example (illustrative only):**
+> This overview explains how the related policies work together. Read the individual policy articles for their settings and requirements.
+
+---
+
 ## Content Rules
 
 **Accuracy first.** Verify feature structure against Microsoft Learn or production observation. If details cannot be confirmed, state so in the confidence note.
@@ -218,6 +235,15 @@ If key author fields are null or missing (for example feature purpose text, SAW 
 2. Is this overview for a multi-policy feature set, platform-specific feature, or a specific compliance/security capability?
 3. Are there existing policy articles related to this feature that should be listed in Related KB Articles?
 4. Who is the primary audience — internal SAW team, customers, or both?
+
+---
+
+## Validation Before Delivery
+
+- Confirm all generated prose follows the CEFR B2 writing rules above.
+- Rewrite long or complex sentences and explain unfamiliar terms where needed.
+- Confirm the rewrite preserves technical meaning, exact names and values, and required labels.
+- Confirm the required sections remain in order and the requested output format is unchanged.
 
 ---
 

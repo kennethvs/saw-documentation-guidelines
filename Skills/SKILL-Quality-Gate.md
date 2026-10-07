@@ -12,6 +12,17 @@ Use this checklist whenever a skill changes, especially for output formats such 
 6. Trigger rules are explicit for category, version, and other optional sections.
 7. Delimiter-safety rules are documented when pipe characters may appear in values.
 8. The master system prompt defers to the skill file for format rules.
+9. Every generation skill requires CEFR B2 (upper-intermediate) English for all generated prose and includes a B2 wording example and a review checklist.
+
+## Writing-level checks
+
+Write new skill instructions and examples at CEFR B2 level. When reviewing generated text, confirm:
+
+- Wording is clear and direct, with familiar words, focused paragraphs, and manageable sentences.
+- Necessary technical terms are kept and unfamiliar terms or acronyms are explained briefly where needed.
+- Exact names, labels, values, commands, code, paths, and URLs remain unchanged.
+- Simpler wording preserves conditions, risks, limitations, uncertainty, and all required technical details.
+- Each skill's output structure and length limits are still met. Description Field output remains one line in one `text` block, with no extra prose.
 
 ## Minimum content for format-heavy skills
 

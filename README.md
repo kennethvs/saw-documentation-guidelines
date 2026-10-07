@@ -17,7 +17,7 @@ Documentation is **source-controlled in Markdown**, then **converted on-demand**
 Maintenance model:
 - Keep project instructions stable and minimal (bootstrap behavior only)
 - Keep document behavior in `/Skills/` files as the source of truth
-- Re-fetch skills from GitHub `main` for every request so updates apply immediately
+- Read the current local skill files for every request, or fetch from GitHub `main` when no local copy is available
 
 ---
 
@@ -35,11 +35,11 @@ Maintenance model:
 4. **Answer clarifying questions** (asked one at a time)
 
 Important: if you provide JSON input, the assistant should first ask: "Based on this JSON, what do you want me to generate?" before drafting any output.
-Important: if latest `main` commit SHA cannot be retrieved, the assistant must stop and ask whether fallback is allowed before continuing.
+Important: if remote retrieval fails, use the current local skill file automatically. If neither source is available, ask the user to provide the required skill file.
 5. **Choose output format:** HTML (ProProfs KB) or DOCX (Word). For Description Field, no format choice is needed.
 6. **Download and import** the converted document
 
-The Claude Project automatically fetches the latest skill file from this repository and applies it to your document.
+The Claude Project reads the current local skill file when available, or fetches it from GitHub `main`, and applies it to your document. GitHub updates apply when the local repository is updated or the skill is fetched from GitHub.
 
 ---
 
@@ -138,6 +138,12 @@ kennethvs/saw-documentation-guidelines/
 
 These rules apply across all skills and documents:
 
+### Writing Level: CEFR B2
+- Write all generated prose at CEFR B2 (upper-intermediate) English level for internal and external audiences
+- Use clear words, direct sentences, and focused paragraphs; explain unfamiliar technical terms briefly where needed
+- Preserve exact technical names, labels, values, commands, code, paths, and URLs, along with all conditions, risks, and limitations
+- Follow the writing rules and validation checklist in the selected skill; keep its required output format and length limits
+
 ### Accuracy
 - Never invent setting values, registry keys, OMA-URI paths, or CSP references
 - If source material is unavailable, search Microsoft Learn before documenting
@@ -235,8 +241,8 @@ To avoid frequent project-instruction rewrites:
 1. Keep the project instruction short and focused on fetch/validation guardrails
 2. Store all generation rules in `/Skills/`
 3. Update only the relevant skill file when behavior changes
-4. Require per-request fetch of latest `main` SHA and matching raw skill file
-5. Fail closed on fetch errors unless user explicitly approves fallback
+4. Read the current local skill file for each request, or fetch from GitHub `main` when no local copy is available; no repository-version lookup or version metadata is required
+5. If remote retrieval fails, use the current local copy automatically; ask for the skill file only if neither source is available
 
 Use `PROJECT-INSTRUCTIONS-COPYPASTE.md` as the ready-to-paste project instruction template.
 

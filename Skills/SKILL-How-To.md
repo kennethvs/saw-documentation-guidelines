@@ -261,6 +261,23 @@ One `<li>` per link. Include:
 
 ---
 
+## Writing Level: CEFR B2
+
+Write all generated prose at CEFR B2 (upper-intermediate) English level. Apply this to article text, table explanations, summaries, questions, and other user-facing messages, for both internal and external audiences.
+
+- Use clear, familiar words and direct sentences. Prefer active voice when it makes the meaning clearer.
+- Keep one main idea per sentence. Split long sentences and avoid several nested clauses.
+- Use short, focused paragraphs and clear links between ideas, such as "because", "however", and "therefore".
+- Avoid idioms, unnecessary jargon, formal wording, and abstract phrases. Keep necessary technical terms and explain unfamiliar terms or acronyms briefly on first use.
+- Preserve exact product names, portal labels, policy and group names, setting values, commands, code, paths, URLs, and required output labels. Explain them in the surrounding prose rather than changing them.
+- Keep the full technical meaning, including conditions, risks, limitations, and uncertainty. Simplify the language without removing required detail or adding claims.
+- Examples elsewhere in this skill show structure and content. Rewrite their prose at B2 level before reuse, while preserving exact technical details.
+
+**B2 wording example (illustrative only):**
+> Run the command shown below. Wait until it finishes. Then check the output folder to confirm that the backup files are present.
+
+---
+
 ## Content Rules
 
 **Accuracy first.** Test the procedure in a staging or non-production environment before documenting. Verify every command and every step works as documented.
@@ -287,6 +304,15 @@ If key author fields are null or missing (for example procedure purpose, expecte
 4. What are the most common issues or failure points?
 5. How frequently will this procedure be executed?
 6. Is the procedure reversible, and should rollback instructions be included?
+
+---
+
+## Validation Before Delivery
+
+- Confirm all generated prose follows the CEFR B2 writing rules above.
+- Rewrite long or complex sentences and explain unfamiliar terms where needed.
+- Confirm the rewrite preserves technical meaning, exact names and values, and required labels.
+- Confirm the required sections remain in order and the requested output format is unchanged.
 
 ---
 

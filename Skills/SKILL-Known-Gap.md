@@ -190,6 +190,23 @@ One `<li>` per link. Prioritize official documentation that confirms the gap or 
 
 ---
 
+## Writing Level: CEFR B2
+
+Write all generated prose at CEFR B2 (upper-intermediate) English level. Apply this to article text, table explanations, summaries, questions, and other user-facing messages, for both internal and external audiences.
+
+- Use clear, familiar words and direct sentences. Prefer active voice when it makes the meaning clearer.
+- Keep one main idea per sentence. Split long sentences and avoid several nested clauses.
+- Use short, focused paragraphs and clear links between ideas, such as "because", "however", and "therefore".
+- Avoid idioms, unnecessary jargon, formal wording, and abstract phrases. Keep necessary technical terms and explain unfamiliar terms or acronyms briefly on first use.
+- Preserve exact product names, portal labels, policy and group names, setting values, commands, code, paths, URLs, and required output labels. Explain them in the surrounding prose rather than changing them.
+- Keep the full technical meaning, including conditions, risks, limitations, and uncertainty. Simplify the language without removing required detail or adding claims.
+- Examples elsewhere in this skill show structure and content. Rewrite their prose at B2 level before reuse, while preserving exact technical details.
+
+**B2 wording example (illustrative only):**
+> The platform does not support this action. The approved workaround meets the current requirements, but it needs a manual step. Review the decision if those requirements change.
+
+---
+
 ## Content Rules
 
 **Accuracy first.** Verify the gap exists via:
@@ -217,6 +234,15 @@ If key author fields are null or missing (for example gap decision rationale, ri
 3. What workarounds or alternative approaches have been evaluated?
 4. Who in SAW is the decision-maker for accepting or rejecting this gap?
 5. When should this decision be revisited (e.g., annual review, tied to a feature request, or triggered by a specific event)?
+
+---
+
+## Validation Before Delivery
+
+- Confirm all generated prose follows the CEFR B2 writing rules above.
+- Rewrite long or complex sentences and explain unfamiliar terms where needed.
+- Confirm the rewrite preserves technical meaning, exact names and values, and required labels.
+- Confirm the required sections remain in order and the requested output format is unchanged.
 
 ---
 
